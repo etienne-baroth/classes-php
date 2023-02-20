@@ -17,7 +17,11 @@ class User {
     public function __construct() {
 
         $this->bdd = mysqli_connect("localhost", "root", "", "classes");
-        echo "Connexion établie";
+        if (!$this->bdd) {
+            die("Impossible de se connecter");
+        } else {
+            echo "Vous êtes connecté à la Base de Données.";
+        }
 
     }
 
@@ -39,17 +43,25 @@ class User {
     public function connect($login, $password) {
 
         if($login != '' && $password != '') {
-            $this->bdd->password_verify($password); {
 
-            }
+            $requestConnect = mysqli_query($this->bdd, "SELECT * FROM utilisateurs WHERE login = '$login' and password = '$password'");
+            $_SESSION['login'] = $login;
+            $_SESSION['password'] = $password;
+            echo "Vous êtes connecté ". $_SESSION['login'];
+
         }
     }
 
     public function disconnect() {
 
+        session_destroy();
+
     }
 
     public function delete() {
+
+        // $this->bdd("DELETE FROM utilisateurs where 'login' = $_SESSION['login']");
+        // session_destroy();
 
     }
 
@@ -59,10 +71,13 @@ class User {
 
     public function isConnected() {
 
+        // return
+
     }
 
     public function getAllInfos() {
 
+        // return
 
     }
 
@@ -94,4 +109,6 @@ $testUser = new User();
 
 $testUser->register('test', 'test', 'test', 'test', 'test');
 
-$testUser->getFirstname();
+echo $testUser->connect('test','test');
+
+echo $testUser->getFirstname();
