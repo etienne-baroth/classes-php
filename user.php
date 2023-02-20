@@ -32,7 +32,6 @@ class User {
             $request = mysqli_query($this->bdd, "SELECT * FROM utilisateurs WHERE login = '$login'");
             $result = $request->fetch_array(MYSQLI_ASSOC);
 
-
         }
 
     }
@@ -80,7 +79,7 @@ class User {
     public function getFirstname() {
 
         return $this->firstname;
-        
+
     }
 
     public function getLastname() {
