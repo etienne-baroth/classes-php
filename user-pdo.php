@@ -122,7 +122,6 @@ class Userpdo {
     }
 }
 
-
 // TESTS DE FONCTIONNEMENT
 
 var_dump($_SESSION);
